@@ -20,9 +20,10 @@ Auth::routes();
 
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
-Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::resource('/projects', AdminController::class);
+    Route::get('/', [HomeController::class, 'home'])->name('home');
+    Route::resource('/projects', AdminController::class);
 });
+
 Route::name('guest.')->group(function () {
     Route::get('/', [ GuestController::class , 'home'])->name('home');
 });

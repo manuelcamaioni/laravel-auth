@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Models\Admin\Project;
 
 class ProjectController extends Controller
 {
@@ -12,7 +14,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('admin.projects.index');
+        $projects = Project::all();
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -28,23 +31,36 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        return view('admin.projects.store');
+        $data = $request->validate([
+            'title' => ['required', 'unique', 'max:255'],
+            'link' => ['url'],
+            'date' => ['date']
+        ]);
+
+        $data['slug'] = Str::of($data['title'])->slug('-');
+        $newProject = Project::create($data);
+
+        return redirect()->route('admin.projects.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-        //
+        $project = Project::findOrFail($project->id);
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        $project = Project::findOrFail($project->id);
+        return view('admin.projects.edit', compact('project'));
+
+
     }
 
     /**

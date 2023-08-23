@@ -33,17 +33,22 @@
                                 <td>
                                     {{ $project->slug }}
                                 </td>
-                                <td>
-                                    <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-sm btn-primary">
+                                <td class="d-flex gap-2">
+                                    <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-sm btn-primary">
                                         View
                                     </a>
-                                    <a href="{{ route('admin.projects.edit', $project->id) }}"
-                                        class="btn btn-sm btn-success">
+                                    <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-sm btn-success">
                                         Edit
                                     </a>
-                                    <a href="" class="btn btn-sm btn-warning">
-                                        Delete
-                                    </a>
+                                    <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-warning">
+                                            Delete
+                                        </button>
+
+                                    </form>
+
                                 </td>
                             </tr>
                         @endforeach

@@ -21,7 +21,10 @@ Auth::routes();
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function(){
     Route::get('/', [HomeController::class, 'home'])->name('home');
+    Route::get('/projects/deleted', [AdminController::class, 'deletedIndex'])->name('projects.deleted');
+    Route::post('/projects/deleted/{post}', [AdminController::class, 'restore'])->name('projects.restore');
     Route::resource('/projects', AdminController::class);
+
 });
 
 Route::name('guest.')->group(function () {

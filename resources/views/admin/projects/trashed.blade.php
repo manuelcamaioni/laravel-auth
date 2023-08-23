@@ -10,7 +10,7 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Title</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Dateedeee</th>
                             <th scope="col">Slug</th>
                             <th></th>
                         </tr>
@@ -34,17 +34,17 @@
                                     {{ $project->slug }}
                                 </td>
                                 <td class="d-flex gap-2">
-                                    <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-sm btn-primary">
-                                        View
-                                    </a>
-                                    <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-sm btn-success">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                                    <form action="{{ route('admin.projects.restore', $project) }}" method="POST">
                                         @csrf
+                                        @method('POST')
+                                        <button type="submit" class="btn btn-sm btn-primary">
+                                            Restore
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
                                         @method('DELETE')
-
-                                        <button type="submit" class="btn btn-sm btn-warning">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-danger">
                                             Delete
                                         </button>
 

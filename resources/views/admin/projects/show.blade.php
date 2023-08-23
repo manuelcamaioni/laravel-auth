@@ -8,7 +8,8 @@
                     <h5 class="card-header"> ID: {{ $project->id }} ---- {{ $project->slug }}</h5>
                     <div class="card-body">
                         <h5 class="card-title">
-                            {{ $project->title }}
+                            Title: {{ $project->title }}
+                            Slug: {{ $project->slug }}
                         </h5>
                         <p class="card-text">
                             {{ $project->description }}

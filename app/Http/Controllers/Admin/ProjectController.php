@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Admin\Project;
+use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
 {
@@ -32,8 +33,9 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => ['required', 'unique', 'max:255'],
+            'title' => ['required', 'unique:projects', 'max:255'],
             'link' => ['url'],
+            'description' => ['min:10'],
             'date' => ['date']
         ]);
 
@@ -48,7 +50,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project = Project::findOrFail($project->id);
+
         return view('admin.projects.show', compact('project'));
     }
 
@@ -57,7 +59,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $project = Project::findOrFail($project->id);
+
         return view('admin.projects.edit', compact('project'));
 
 
@@ -66,9 +68,19 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $request->validate([
+            'title' => ['required', 'max:255', Rule::unique('projects')->ignore($project->id)],
+            'link' => ['url'],
+            'date' => ['date']
+        ]);
+
+        $data = $request->all();
+        $data['slug'] = Str::of($data['title'])->slug('-');
+
+        $project->update($data);
+        return redirect()->route('admin.projects.show', compact('project'));
     }
 
     /**

@@ -17,12 +17,13 @@
                 @endif
             </div>
             <div class="col-8">
+                <h2>ID: {{ $project->id }}</h2>
                 <h1>
                     Edit {{ $project->title }}
                 </h1>
             </div>
 
-            <form class="col-8" action="{{ route('admin.projects.update', $project->id) }}" method="POST">
+            <form class="col-8" action="{{ route('admin.projects.update', $project) }}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -30,27 +31,30 @@
                     <label for="title" class="form-label">
                         Title
                     </label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{ $project->title }}">
+                    <input type="text" class="form-control" id="title" name="title"
+                        value="{{ old('title', $project->title) }}">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">
                         Description
                     </label>
                     <input type="text" class="form-control" id="description" name="description"
-                        value="{{ $project->description }}">
+                        value="{{ old('description', $project->description) }}">
                 </div>
                 <div class="mb-3">
                     <label for="link" class="form-label">
                         Link
                     </label>
-                    <input type="text" class="form-control" id="link" name="link" value="{{ $project->link }}">
+                    <input type="text" class="form-control" id="link" name="link"
+                        value="{{ old('link', $project->link) }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="date" class="form-label">
                         Date
                     </label>
-                    <input type="date" class="form-control" id="date" name="date" value="{{ $project->date }}">
+                    <input type="date" class="form-control" id="date" name="date"
+                        value="{{ old('date', $project->date) }}">
                 </div>
 
 

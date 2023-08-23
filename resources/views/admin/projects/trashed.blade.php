@@ -34,14 +34,14 @@
                                     {{ $project->slug }}
                                 </td>
                                 <td class="d-flex gap-2">
-                                    <form action="{{ route('admin.projects.restore', $project) }}" method="POST">
+                                    <form action="{{ route('admin.projects.restore', $project->id) }}" method="POST">
                                         @csrf
                                         @method('POST')
                                         <button type="submit" class="btn btn-sm btn-primary">
                                             Restore
                                         </button>
                                     </form>
-                                    <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                                    <form action="{{ route('admin.projects.hard-delete', $project->id) }}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-danger">

@@ -35,18 +35,15 @@
                         value="{{ old('title', $project->title) }}">
                 </div>
                 <div class="mb-3">
+                    <label for="image" class="d-block mb-2">Image</label>
+                    <input type="file" name="image" id="image" value={{ old($project->image, '') }}>
+                </div>
+                <div class="mb-3">
                     <label for="description" class="form-label">
                         Description
                     </label>
                     <input type="text" class="form-control" id="description" name="description"
                         value="{{ old('description', $project->description) }}">
-                </div>
-                <div class="mb-3">
-                    <label for="link" class="form-label">
-                        Link
-                    </label>
-                    <input type="text" class="form-control" id="link" name="link"
-                        value="{{ old('link', $project->link) }}">
                 </div>
 
                 <div class="mb-3">

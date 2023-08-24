@@ -9,13 +9,25 @@
                     <div class="card-body">
                         <h5 class="card-title">
                             Title: {{ $project->title }}
-                            Slug: {{ $project->slug }}
                         </h5>
+                        <h5>Slug: {{ $project->slug }}</h5>
+                        <div class="mb-3">
+                            @if (str_starts_with($project->image, 'http'))
+                                <img class="w-100" src="{{ $project->image }}" alt="{{ $project->title }}">
+                            @else
+                                <img class="w-100" src="{{ asset('storage/' . $project->image) }}"
+                                    alt="{{ $project->title }}">
+                            @endif
+
+                        </div>
                         <p class="card-text">
                             {{ $project->description }}
-                        <p><strong>{{ $project->date }}</strong></p>
-                        <a href="#">{{ $project->link }}</a>
                         </p>
+                        <p>
+                            <strong>{{ $project->date }}</strong>
+                        </p>
+
+
                         <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-sm btn-success">
                             Edit
                         </a>

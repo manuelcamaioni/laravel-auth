@@ -4,7 +4,7 @@
     <div class="container" id="posts-container">
         <div class="row justify-content-center">
             <div class="col-12">
-                <form action="{{ route('admin.projects.store') }}" method="POST">
+                <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     @error('title')
@@ -16,6 +16,15 @@
                         </label>
                         <input type="text" class="form-control" id="title" placeholder="Insert your project's title"
                             name="title">
+                    </div>
+                    @error('image')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    <div class="mb-5">
+                        <label for="exampleFormControlInput1" class="form-label">
+                            Image
+                        </label>
+                        <input type="file" class="form-control" id="image" name="image">
                     </div>
 
                     @error('description')
@@ -41,10 +50,10 @@
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="me-3">
+                        <button type="submit" class="btn btn-success me-3">
                             Create new project
                         </button>
-                        <button type="reset">
+                        <button type="reset" class="btn btn-secondary">
                             Reset
                         </button>
                     </div>

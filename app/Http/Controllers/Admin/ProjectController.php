@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Admin\Project;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -32,12 +33,21 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->validate([
             'title' => ['required', 'unique:projects', 'max:255'],
-            'link' => ['url'],
             'description' => ['min:10'],
-            'date' => ['date']
+            'date' => ['date'],
+            'image' => ['image']
         ]);
+
+
+        if ($request->hasFile('image')){
+            $img_path = Storage::put('uploads', $request['image']);
+            $data['image'] = $img_path;
+        }
+
+
 
         $data['slug'] = Str::of($data['title'])->slug('-');
         $newProject = Project::create($data);
@@ -77,6 +87,10 @@ class ProjectController extends Controller
         ]);
 
         $data = $request->all();
+        if($request->hasFile('image')){
+            $data['image'] = Storage::put('uploads', $request['image']);
+        }
+
         $data['slug'] = Str::of($data['title'])->slug('-');
 
         $project->update($data);

@@ -18,9 +18,9 @@ class ProjectSeeder extends Seeder
             $newProject = new Project();
             $newProject->title = $faker->words(rand(1, 10), true);
             $newProject->description = $faker->paragraph(10, true);
-            $newProject->link = $faker->url();
             $newProject->slug = $faker->slug();
             $newProject->date = $faker->date();
+            $newProject->image = $faker->imageUrl(480, 360, 'post', true, 'posts', true, 'png');
             $newProject->save();
         }
     }

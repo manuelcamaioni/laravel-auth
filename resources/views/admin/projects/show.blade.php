@@ -12,6 +12,7 @@
                         </h5>
                         <h5>Slug: {{ $project->slug }}</h5>
                         <div class="mb-3">
+
                             @if (str_starts_with($project->image, 'http'))
                                 <img class="w-100" src="{{ $project->image }}" alt="{{ $project->title }}">
                             @else
@@ -31,9 +32,14 @@
                         <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-sm btn-success">
                             Edit
                         </a>
-                        <a href="" class="btn btn-sm btn-warning">
-                            Delete
-                        </a>
+                        <form class="d-inline-block" action="{{ route('admin.posts.destroy', $project) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn btn-sm btn-warning">
+                                Delete
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

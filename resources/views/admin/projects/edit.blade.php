@@ -23,7 +23,8 @@
                 </h1>
             </div>
 
-            <form class="col-8" action="{{ route('admin.projects.update', $project) }}" method="POST">
+            <form class="col-8" action="{{ route('admin.projects.update', $project) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

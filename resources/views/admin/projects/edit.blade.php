@@ -35,9 +35,10 @@
                     <input type="text" class="form-control" id="title" name="title"
                         value="{{ old('title', $project->title) }}">
                 </div>
+
                 <div class="mb-3">
                     <label for="image" class="d-block mb-2">Image</label>
-                    <input type="file" name="image" id="image" value={{ old($project->image, '') }}>
+                    <input type="file" name="image" id="image" value={{ old('image', '') }}>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">

@@ -32,7 +32,8 @@
                         <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-sm btn-success">
                             Edit
                         </a>
-                        <form class="d-inline-block" action="{{ route('admin.posts.destroy', $project) }}" method="POST">
+                        <form class="d-inline-block" action="{{ route('admin.projects.destroy', $project) }}"
+                            method="POST">
                             @csrf
                             @method('DELETE')
 
